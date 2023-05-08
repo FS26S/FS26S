@@ -1,0 +1,109 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container{
+  height: 100vh;
+  width: 100%;
+}
+
+.main{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input, .input, select{
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 7px;
+  height: 30px;
+}
+
+.invalid{
+  border: 1px solid rgba(255, 0, 0, 0.492);
+  background-color: #ff000010
+}
+
+.input-group{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.form{
+  border: 2px solid #8E8888;
+  border-radius: 5px;
+  padding: 15px;
+  width: 300px;  
+}
+
+.form>form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form>form>p{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+.btn{
+  padding: 8px 30px ; 
+  margin: 10px auto 0px auto;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 5px;
+  color: #000;
+  cursor: pointer;
+}
+
+.cadastrarHover{
+  border: 1px solid #0F66E8;
+  color: #0F66E8;
+}
+
+.cadastrarHover:hover{
+  border-color: #0F66E8;
+  background-color: #0F66E8;
+  color: #fff;
+  transition: ease-in 0.2s;
+}
+
+.buttonHover{
+  cursor: pointer;
+  border: 0px;
+  color:#fff;
+  width: 70px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
