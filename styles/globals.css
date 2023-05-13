@@ -97,13 +97,3 @@ input, .input, select{
   height: 30px;
   border-radius: 8px;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-}
