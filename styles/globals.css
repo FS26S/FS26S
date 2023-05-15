@@ -23,58 +23,26 @@ a {
 .main{
   height: 100%;
   width: 100%;
+  padding: 20px 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-input, .input, select{
-  padding: 5px;
-  border: 1px solid black;
-  border-radius: 7px;
-  height: 30px;
-}
-
-.invalid{
-  border: 1px solid rgba(255, 0, 0, 0.492);
-  background-color: #ff000010
-}
-
-.input-group{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 5px;
-}
-
 .form{
   border: 2px solid #8E8888;
   border-radius: 5px;
   padding: 15px;
-  width: 300px;  
+  width: 300px; 
 }
 
-.form>form{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.form>form>p{
+.form p{
   text-align: center;
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
   margin-top: 0;
-}
-.btn{
-  padding: 8px 30px ; 
-  margin: 10px auto 0px auto;
-  border: 1px solid black;
-  background-color: white;
-  border-radius: 5px;
-  color: #000;
-  cursor: pointer;
 }
 
 .cadastrarHover{
@@ -96,4 +64,39 @@ input, .input, select{
   width: 70px;
   height: 30px;
   border-radius: 8px;
+}
+
+form .form-group{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group label{
+  margin-right: 10px;
+}
+
+.buttons{
+  float: right;
+  margin-top: 5%;
+  align-self: flex-end;
+}
+
+.buttons button{
+  margin: 0 10px;
+  width:64px;
+  height: 34px;
+  padding: 5px;
+  text-align: center;
+}
+
+button svg, button img{
+  margin: 1px;
+  vertical-align: unset;
+}
+
+form label{
+  margin-top: .5rem;
+  min-width: 75px;
 }
