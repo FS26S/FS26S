@@ -45,27 +45,6 @@ a {
   margin-top: 0;
 }
 
-.cadastrarHover{
-  border: 1px solid #0F66E8;
-  color: #0F66E8;
-}
-
-.cadastrarHover:hover{
-  border-color: #0F66E8;
-  background-color: #0F66E8;
-  color: #fff;
-  transition: ease-in 0.2s;
-}
-
-.buttonHover{
-  cursor: pointer;
-  border: 0px;
-  color:#fff;
-  width: 70px;
-  height: 30px;
-  border-radius: 8px;
-}
-
 form .form-group{
   display: flex;
   flex-direction: row;
@@ -94,11 +73,6 @@ form .form-group{
 button svg, button img{
   margin: 1px;
   vertical-align: unset;
-}
-
-form label{
-  margin-top: .5rem;
-  min-width: 75px;
 }
 
 form label{
