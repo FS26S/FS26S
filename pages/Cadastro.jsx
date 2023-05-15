@@ -16,15 +16,15 @@ function Cadastro() {
         }
         if (data.senha !== data.confirmarSenha) { //Validação da senha
             alert('As senhas não coincidem');    //Adiciona um destaque vermelho nos campos de senha
-            document.getElementById('senha').classList.add('invalid');
-            document.getElementById('confirmarSenha').classList.add('invalid');
+            document.getElementById('senha').classList.add('is-invalid');
+            document.getElementById('confirmarSenha').classList.add('is-invalid');
             return;
-        } else{ //Remove a classe invalid quando a senha está ok
-            document.getElementById('senha').classList.remove('invalid');
-            document.getElementById('confirmarSenha').classList.remove('invalid');
+        } else { //Remove a classe invalid quando a senha está ok
+            document.getElementById('senha').classList.remove('is-invalid');
+            document.getElementById('confirmarSenha').classList.remove('is-invalid');
         }
         fetch(url + '/cadastro', { //Também atualizar aqui a URL da API se necessário
-            method: 'POST', 
+            method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
@@ -45,32 +45,32 @@ function Cadastro() {
 
     function Input(props) {
         return (
-            <Form.Group className='input-group'>
+            <Form.Group className=''>
                 <Form.Label>{props.label}</Form.Label>
-                <Form.Control type={props.type} name={props.name} id={props.id}  />
+                <Form.Control type={props.type} name={props.name} id={props.id} />
             </Form.Group>
         )
     }
 
     return (
-        <div className='form'>
-            <form method="post" onSubmit={handleSubmit} >
-                <p className=''>Cadastro</p>
-                <Input label="Email" name="email" id="email" type="email" />
-                <Input label="Nome" type="text" id="nome" name="nome" />
-                <div className='input-group'>
-                    <label>Cargo</label>
-                    <select name="cargo" defaultValue={""}>
-                        <option value="" disabled>Selecione</option>
-                        <option value="professor">Professor</option>
-                        <option value="aluno">Servidor</option>
-                    </select>
-                </div>
-                <Input label="Senha" type="password" name="senha" id="senha" />
-                <Input label="Confirmar Senha" type="password" name="confirmarSenha" id="confirmarSenha" />
-                <button className='btn cadastrarHover' type="submit">Cadastrar</button>
-            </form>
-        </div>
+        <Form className="form" method="post" onSubmit={handleSubmit}>
+            <p className=''>Cadastro</p>
+            <Input label="Email" name="email" id="email" type="email" />
+            <Input label="Nome" type="text" id="nome" name="nome" />
+            <Form.Group className=''>
+                <Form.Label>Cargo</Form.Label>
+                <Form.Select name="cargo" defaultValue={""}>
+                    <option value="" disabled>Selecione</option>
+                    <option value="professor">Professor</option>
+                    <option value="aluno">Servidor</option>
+                </Form.Select>
+            </Form.Group>
+            <Input label="Senha" type="password" name="senha" id="senha" />
+            <Input label="Confirmar Senha" type="password" name="confirmarSenha" id="confirmarSenha" />
+            <div className="mx-auto w-50">
+                <input type="submit" value="Cadastrar" className="mt-3 w-100 btn btn-outline-primary" title="Cadastrar" />
+            </div>
+        </Form>
     )
 }
 
