@@ -19,7 +19,7 @@ function Cadastro() {
             document.getElementById('senha').classList.add('is-invalid');
             document.getElementById('confirmarSenha').classList.add('is-invalid');
             return;
-        } else { //Remove a classe invalid quando a senha está ok
+        } else { //Remove a classe is-invalid quando a senha está ok
             document.getElementById('senha').classList.remove('is-invalid');
             document.getElementById('confirmarSenha').classList.remove('is-invalid');
         }

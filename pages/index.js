@@ -1,6 +1,7 @@
 import Head from 'next/head'
 //import Login from './login'
 //import CadastroLab from './CadastroLab'
+//inserir <Login /> dentro do <main> quando estiver pronto
 
 
 export default function Home() {
