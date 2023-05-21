@@ -1,0 +1,32 @@
+.background{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.utfpr{
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.separador{
+    width: 310px;
+    text-align: center;
+
+}
+.cadastro{
+    text-align: center;
+    padding: 20px;
+    color: #0F66E8;
+}
+.recuperarSenha{
+    margin-left: 5px;
+    font-size: 12px;
+    color: #0F66E8;
+}
