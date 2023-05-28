@@ -1,7 +1,8 @@
 import Head from 'next/head'
 //import Login from './login'
-//import CadastroLab from './CadastroLab'
-//inserir <Login /> dentro do <main> quando estiver pronto
+import CadastroLab from './cadastroLab'
+import Cadastro from './cadastrar'
+import ControleEstoque from './controleEstoque'
 
 
 export default function Home() {
@@ -10,12 +11,10 @@ export default function Home() {
       <Head>
         <title>FS26S</title>
         <meta name="description" content="Controle de Patrimônio e Reservas de sala da UTFPR-DV" />
-        <link rel="icon" href="/favicon.ico" />
-        
+        <link rel="icon" href="/favicon.ico" /> 
       </Head>
 
       <main className="main">
-        
       </main>
     </div>
   )
