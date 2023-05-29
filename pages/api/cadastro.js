@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
     // Get data submitted in request's body.
     const body = req.body;
-
-    const response = await fetch('http://localhost:3000/pessoa',
+    const url = `http://localhost:3000/pessoa`;
+    const response = await fetch(url,
         {
             method: 'POST',
             headers: {

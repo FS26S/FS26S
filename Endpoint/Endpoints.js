@@ -140,6 +140,7 @@ const MovimentacaoEstoque = sequelize.define('movimentacao_estoque', {
 
 app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
 
+
 module.exports = { app, Sala };
 module.exports = { app, Equipamento };
 module.exports = { app, Pessoa };

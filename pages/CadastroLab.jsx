@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 const save = require('../public/assets/Save.png');
 
@@ -44,15 +44,15 @@ export default function CadastroLab(props) {
         })*/
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         //Verificar se o usuário está logado
         //Se não estiver
         //window.location.href = "/login";
     }
-        , [])
+        , []) */
     return (
         <>
-            <Form className="row g-3" style={{ width: '100%' }}>
+            <Form className="row g-3" style={{ width: '100%' }} id="formCadastroLab">
                 <div className="d-flex justify-content-between">
                     <Form.Group className="form-group w-50" controlId="codSala">
                         <Form.Label className=" text-secondary" >Cód. Sala</Form.Label>
