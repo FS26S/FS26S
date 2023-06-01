@@ -1,8 +1,8 @@
 import Head from 'next/head'
 //import Login from './login'
-import CadastroLab from './cadastroLab'
+/*import CadastroLab from './cadastroLab'
 import Cadastro from './cadastrar'
-import ControleEstoque from './controleEstoque'
+import ControleEstoque from './controleEstoque'*/
 
 
 export default function Home() {
@@ -14,8 +14,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" /> 
       </Head>
 
-      <main className="main">
-      </main>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
+import Search from "../src/components/inputPesquisa";
 const save = require('../public/assets/Save.png');
 
 
@@ -68,52 +69,33 @@ export default function ControleEstoque() {
         //Integrar com a API
     }
 
-    function handleDelete(e) {
+    async function handleDelete(e) {
         e.preventDefault();
-
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
-        console.log(data);
-        //Integrar com a API
-        /*fetch('http://localhost:3000/api/salas', {
+        const res = await fetch('http://localhost:3001/api/movimentacao', {
             method: 'DELETE',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Erro ao deletar');
-        })
-        .catch((error) => {
-            console.log(error);
-        })*/
+        const json = await res.json();
+        alert(json.message);
     }
 
-    /*useEffect(() => {
-        //Verificar se o usuário está logado
-        //Se não estiver
-        //window.location.href = "/login";
-    }
-        , [])*/
     return (
         <main className="main">
-            <Form.Group className="input-group w-75 mx-auto">
-                <Form.Control type="text" className="" name="busca" id="busca" />
-                <Button type="submit" variant="outline-secondary" onClick={getPatrimonio}>Buscar</Button>
-            </Form.Group>
-            <Form className="row g-3" style={{ width: '100%' }} onSubmit={handleAdd}>
+            <Search onClick={getPatrimonio}/>
+            <Form className="row g-3 mt-5" style={{ width: '100%' }} onSubmit={handleAdd}>
                 <div className="d-flex justify-content-between">
                     <Form.Group className="form-group w-50" controlId="codPatrimonio">
                         <Form.Label className=" text-secondary" >Cód. Patrimônio</Form.Label>
-                        <Form.Control name="codPatrimonio" type="text" disabled={true} readOnly={true} />
+                        <Form.Control  type="text" disabled={true} readOnly={true} />
                     </Form.Group>
                     <Form.Group controlId="saldoEstoque" className="text-secondary col-md-5 form-group" >
                         <Form.Label>Saldo Estoque</Form.Label>
-                        <Form.Control name="saldoEstoque" disabled={true} type="number" readOnly={true} />
+                        <Form.Control  disabled={true} type="number" readOnly={true} />
                     </Form.Group>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">

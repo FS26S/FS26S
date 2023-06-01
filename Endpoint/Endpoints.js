@@ -443,6 +443,22 @@ app.get('/relacionamento/:id', async (req, res) => {
     }
 });
 
+app.get('/relacionamento/sala/:id', async (req, res) => {
+    //buscando o relacionamento pelo id da sala
+    try {
+        const relEquiSala = await RelEquiSala.findAll({ where: { id_sala: req.params.id } });
+        if (relEquiSala) {
+            res.status(200).json(relEquiSala);
+        } else {
+            res.status(404).json({ message: 'Não foi encontrado nenhum patrimônio cadastro para a sala com o código informado' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Erro ao buscar o relacionamento' });
+    }
+});
+
+
 app.put('/relacionamento/:id', async (req, res) => {
     try {
         const relEquiSala = await RelEquiSala.findByPk(req.params.id);

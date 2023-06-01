@@ -70,8 +70,8 @@ function Cadastro() {
     }
 
     return (
-        <main className="main">
-            <Form className="form" method="post" onSubmit={handleSubmit} >
+        <main className="main d-flex align-items-center ">
+            <Form className="form  mx-auto" method="post" onSubmit={handleSubmit} >
                 <p className=''>Cadastro</p>
                 <Input label="Email" name="email" id="email" type="email" />
                 <Input label="Nome" type="text" id="nome" name="nome" />

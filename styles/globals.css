@@ -21,13 +21,13 @@ a {
 }
 
 .main{
-  height: 100%;
+  height: 100vh;
   width: 100%;
   padding: 20px 10%;
-  display: flex;
+  /*display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;*/
 }
 
 .form{
@@ -78,4 +78,17 @@ button svg, button img{
 form label{
   margin-top: .5rem;
   min-width: 80px;
+}
+
+.search{
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tableRelacionamento{
+  max-height: 300px;
+  overflow-y: auto;
+
 }
