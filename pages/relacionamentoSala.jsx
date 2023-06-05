@@ -27,10 +27,11 @@ export default function RelacionamentoSala() {
     }
 
     async function getPatrimonios() {
-        const res = await fetch(`http://localhost:3001/api/equipamento`)
+        const response = await fetch(`http://localhost:3001/api/patrimonios`)
         try {
-            const json = await res.json();
-            if (json.codPatrimonio) {
+            const json = await response.json();
+            console.log(json)
+            if (json) {
                 setPatrimonios(json);
             } else {
                 setPatrimonios(null);
@@ -155,7 +156,7 @@ export default function RelacionamentoSala() {
             {
                 isOpen  &&
                 <Form.Group as={Row} className="mx-auto my-5 w-75">
-                    {patrimonios.length!==1 /* 0 */ ? <>
+                    {patrimonios.length!==0 /* 0 */ ? <>
                     <Form.Label column className="mx-3">Patrimônio</Form.Label>
                     <Col sm={7}>
                         <Form.Select name="patrimonio" className="mx-3" type="number" defaultValue={""} >

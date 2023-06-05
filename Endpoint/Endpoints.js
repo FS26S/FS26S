@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize('fs26s', 'postgres', '123456', {
+const sequelize = new Sequelize('fs26s', 'postgres',/* '1234'*/ '123456', {
     host: 'localhost',
     dialect: 'postgres',
 });
