@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react';
 const save = require('../public/assets/Save.png');
 
 export default function RelacionamentoSala() {
-    const [patrimonios, setPatrimonios] = useState([]);
+    const [patrimonioSala, setPatrimonioSala] = useState([]);  //patrimonios relacionados a sala
+    const [patrimonios, setPatrimonios] = useState([]); //todos os patrimonios em estoque
+    const [isOpen, setIsOpen] = useState(false);
 
-    async function getPatrimonio() {
+    async function getPatrimonioSala() {
         let codSala = document.getElementById('busca').value;
         const res = await fetch(`http://localhost:3001/api/equipamento/relacaosala?id=${codSala}`)
         try {
@@ -19,6 +21,21 @@ export default function RelacionamentoSala() {
                 alert(json.message);
             }
             document.getElementById('codSala').value = codSala;
+        } catch (e) {
+            alert('Erro ao buscar patrimônio');
+        }
+    }
+
+    async function getPatrimonios(){
+        const res = await fetch(`http://localhost:3001/api/equipamento`)
+        try {
+            const json = await res.json();
+            if (json.codPatrimonio) {
+                setPatrimonios(json);
+            } else {
+                setPatrimonios([]);
+                alert(json.message);
+            }
         } catch (e) {
             alert('Erro ao buscar patrimônio');
         }
@@ -41,8 +58,9 @@ export default function RelacionamentoSala() {
     }
 
     useEffect(() => {
+        getPatrimonios()
         //setando os patrimonios para teste 
-        setPatrimonios([
+        setPatrimonioSala([
             {
                 id_equipamento: 1,
                 nome: 'Patrimônio 1',
@@ -97,7 +115,7 @@ export default function RelacionamentoSala() {
 
     return (
         <div className="main">
-            <Search onClick={getPatrimonio} />
+            <Search onClick={getPatrimonioSala} />
 
             <Form.Group className="mx-auto d-flex justify-content-center align-items-center mb-3 w-50">
                 <Form.Label>Cód Sala/Lab</Form.Label>
@@ -115,8 +133,8 @@ export default function RelacionamentoSala() {
                         </tr>
                     </thead>
                     <tbody>
-                        {patrimonios.length > 0 ?
-                            patrimonios.map((patrimonio) => (
+                        {patrimonioSala.length > 0 ?
+                            patrimonioSala.map((patrimonio) => (
                                 <tr style={{ borderBottom: '2px solid #ccc' }}>
                                     <th scope="row">
                                         <Form.Check type="checkbox" id={patrimonio.id_equipamento} />
@@ -124,7 +142,6 @@ export default function RelacionamentoSala() {
                                     <td>{patrimonio.nome}</td>
                                     <td>{patrimonio.qtdAtivos}</td>
                                     <td>{patrimonio.qtdConserto}</td>
-
                                 </tr>
                             )
                             ) :
@@ -135,6 +152,25 @@ export default function RelacionamentoSala() {
                     </tbody>
                 </Table>
             </div>
+            {
+                isOpen &&
+                <><Form.Group className="mx-auto d-flex justify-content-center align-items-center mb-3 w-50">
+                    <Form.Label>Quantidade</Form.Label>
+                    <Form.Select name="patrimonio" type="number" defaultValue={""} >
+                        <option value="" disabled={true}>Selecione</option>
+                        {
+                            patrimonios.map((patrimonio) => (
+                                <option value={patrimonio.id_equipamento}>{patrimonio.id_equipamento} - {patrimonio.nome}</option>
+                            ))
+
+                        }
+                    </Form.Select>
+                </Form.Group>
+                <Button variant="danger" type="button" onClick={()=>setIsOpen(false)} title="Cancelar">
+                    Cancelar
+                </Button></>
+
+            }
 
             <div className="buttons">
                 <Button variant="danger" type="button" onClick={handleDelete} title="Excluir" >
@@ -151,7 +187,7 @@ export default function RelacionamentoSala() {
                     />
                 </Button>
 
-                <Button type="button" title="Adicionar" >
+                <Button type="button" title="Adicionar" onClick={()=>setIsOpen(!isOpen)} >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                     </svg></Button>
