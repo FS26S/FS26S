@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize('fs26s', 'postgres',/* '1234'*/ '123456', {
+const sequelize = new Sequelize('fs26s', 'postgres', '1234'/* '123456'*/, {
     host: 'localhost',
     dialect: 'postgres',
 });
@@ -35,6 +35,7 @@ const Equipamento = sequelize.define('equipamento', {
     },
     nome: Sequelize.STRING,
     marca: Sequelize.STRING,
+    estoque: Sequelize.INTEGER,
     flaginativo: Sequelize.BOOLEAN
 }, {
     tableName: 'equipamento',
@@ -447,7 +448,7 @@ app.get('/relacionamento/sala/:id', async (req, res) => {
     //buscando o relacionamento pelo id da sala
     try {
         const relEquiSala = await RelEquiSala.findAll({ where: { id_sala: req.params.id } });
-        if (relEquiSala) {
+        if (relEquiSala.length > 0) {
             res.status(200).json(relEquiSala);
         } else {
             res.status(404).json({ message: 'Não foi encontrado nenhum patrimônio cadastro para a sala com o código informado' });
@@ -493,6 +494,7 @@ app.delete('/relacionamento/:id', async (req, res) => {
 app.post('/movimentacao', async (req, res) => {
     try {
         const movimentacao = await MovimentacaoEstoque.create(req.body);
+        await Equipamento.update({ estoque: movimentacao.saldo_estoque }, { where: { id_equipamento: req.body.id_equipamento } });
         res.status(201).json(movimentacao);
     } catch (err) {
         console.error(err);
@@ -553,3 +555,4 @@ app.delete('/movimentacao/:id', async (req, res) => {
         res.status(500).json({ message: 'Erro ao excluir movimentação' });
     }
 });
+

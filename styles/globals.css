@@ -54,6 +54,11 @@ form .form-group{
   margin-right: 10px;
 }
 
+.form-control:read-only {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
 .buttons{
   margin-top: 5%;
   display: flex;

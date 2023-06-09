@@ -14,10 +14,11 @@ export default function RelacionamentoSala() {
         const res = await fetch(`http://localhost:3001/api/equipamento/relacaosala?id=${codSala}`)
         try {
             const json = await res.json();
-            if (json.codPatrimonio) {
-                setPatrimonios(json);
+            console.log(json)
+            if (res.status == 200) {
+                setPatrimonioSala(json);
             } else {
-                setPatrimonios([]);
+                setPatrimonioSala([]);
                 alert(json.message);
             }
             document.getElementById('codSala').value = codSala;
@@ -42,7 +43,34 @@ export default function RelacionamentoSala() {
         }
     }
 
-    async function handleSave(e) { }
+    async function handleSave(e) {
+        let codSala = document.getElementById('codSala').value;
+        let idPatrimonio = document.getElementById('patrimonio').value;
+        if (codSala !== '' && idPatrimonio !== '') {
+            document.getElementById('codSala').classList.remove('is-invalid');
+            document.getElementById('patrimonio').classList.remove('is-invalid');
+            const response = await fetch(`http://localhost:3001/api/equipamento/relacaosala`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    id_equipamento: idPatrimonio,
+                    id_sala: codSala
+                })
+            }
+            )
+            if (response.status == 201) {
+                alert('Patrimônio relacionado com sucesso!');
+                getPatrimonioSala();
+            } else {
+                alert('Erro ao relacionar patrimônio');
+            }
+
+        } else {
+            document.getElementById('codSala').classList.add('is-invalid');
+            document.getElementById('patrimonio').classList.add('is-invalid');
+            alert('Selecione um patrimônio e informe o código da sala');
+
+        }
+    }
     async function handleDelete() {
 
         let check = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -56,12 +84,15 @@ export default function RelacionamentoSala() {
                 })
             }
         }
+        getPatrimonioSala();
     }
 
     useEffect(() => {
-        getPatrimonios()
+        getPatrimonios();
+        
+        //getPatrimonioSala();
         //setando os patrimonios para teste 
-        setPatrimonioSala([
+        /*setPatrimonioSala([
             {
                 id_equipamento: 1,
                 nome: 'Patrimônio 1',
@@ -110,7 +141,7 @@ export default function RelacionamentoSala() {
                 qtdAtivos: 2,
                 qtdConserto: 1,
             },
-        ]);
+        ]);*/
     }, []);
 
 
@@ -120,7 +151,7 @@ export default function RelacionamentoSala() {
 
             <Form.Group className="mx-auto d-flex justify-content-center align-items-center mb-3 w-50">
                 <Form.Label>Cód Sala/Lab</Form.Label>
-                <Form.Control type="text" disabled={true} id="codSala" />
+                <Form.Control type="number" disabled={true} id="codSala" />
             </Form.Group>
             <div className="tableRelacionamento w-75 mx-auto">
                 <hr className='w-100' />
@@ -136,11 +167,12 @@ export default function RelacionamentoSala() {
                     <tbody>
                         {patrimonioSala.length > 0 ?
                             patrimonioSala.map((patrimonio) => (
-                                <tr style={{ borderBottom: '2px solid #ccc' }}>
+                                <tr key={patrimonio.id_relacionamento} style={{ borderBottom: '2px solid #ccc' }}>
                                     <th scope="row">
                                         <Form.Check type="checkbox" id={patrimonio.id_equipamento} />
                                     </th>
-                                    <td>{patrimonio.nome}</td>
+                                    
+                                    <td>Cod:{patrimonio.id_equipamento} - {patrimonio.nome}</td>
                                     <td>{patrimonio.qtdAtivos}</td>
                                     <td>{patrimonio.qtdConserto}</td>
                                 </tr>
@@ -154,30 +186,30 @@ export default function RelacionamentoSala() {
                 </Table>
             </div>
             {
-                isOpen  &&
+                isOpen &&
                 <Form.Group as={Row} className="mx-auto my-5 w-75">
-                    {patrimonios.length!==0 /* 0 */ ? <>
-                    <Form.Label column className="mx-3">Patrimônio</Form.Label>
-                    <Col sm={7}>
-                        <Form.Select name="patrimonio" className="mx-3" type="number" defaultValue={""} >
-                            <option value="" disabled={true}>Selecione</option>
-                            {
-                                patrimonios.map((patrimonio) => (
-                                    <option value={patrimonio.id_equipamento} disabled={patrimonio.flaginativo} >{patrimonio.id_equipamento} - {patrimonio.nome}</option>
-                                ))
-                                
-                            }
-                        </Form.Select>
-                    </Col>
-                    <Col sm={2}>
-                        <Button variant="danger" type="button" onClick={() => setIsOpen(false)} title="Cancelar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                            </svg>
-                        </Button>
-                    </Col></>
-                    : <p className='text-secondary text-center'>Não foi possível encontrar nenhum patrimônio</p>}
+                    {patrimonios.length !== 0 /* 0 */ ? <>
+                        <Form.Label column className="mx-3">Patrimônio</Form.Label>
+                        <Col sm={7}>
+                            <Form.Select name="patrimonio" id="patrimonio" className="mx-3" type="number" defaultValue={""} >
+                                <option value="" disabled={true}>Selecione</option>
+                                {
+                                    patrimonios.map((patrimonio) => (
+                                        <option key={patrimonio.id_equipamento} value={patrimonio.id_equipamento} disabled={patrimonio.flaginativo} >{patrimonio.id_equipamento} - {patrimonio.nome}</option>
+                                    ))
+
+                                }
+                            </Form.Select>
+                        </Col>
+                        <Col sm={2}>
+                            <Button variant="danger" type="button" onClick={() => setIsOpen(false)} title="Cancelar">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </Button>
+                        </Col></>
+                        : <p className='text-secondary text-center'>Não foi possível encontrar nenhum patrimônio</p>}
                 </Form.Group>
             }
 
@@ -187,7 +219,7 @@ export default function RelacionamentoSala() {
                         <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                     </svg>
                 </Button>
-                <Button variant="success" title="Salvar" type="submit">
+                <Button variant="success" title="Salvar" onClick={handleSave}>
                     <Image
                         width={18}
                         height={18}
@@ -195,7 +227,7 @@ export default function RelacionamentoSala() {
                         alt="Salvar"
                     />
                 </Button>
-                <Button type="button" title="Adicionar" onClick={() => setIsOpen(!isOpen)} >
+                <Button type="button" title="Adicionar" onClick={() => { getPatrimonios(); setIsOpen(!isOpen) }} >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                     </svg></Button>

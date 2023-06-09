@@ -18,8 +18,8 @@ async function cadastrarMovimentacao(req, res) {
         }
     })
     const data = await response.json();
-    if (response.status === 200) {
-        res.status(200).json({ message: 'Cadastro realizado com sucesso!' })
+    if (response.status === 201) {
+        res.status(201).json(data)
     } else {
         res.status(response.status).json(data.message)
     }

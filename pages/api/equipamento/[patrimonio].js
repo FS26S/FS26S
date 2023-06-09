@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
     const url = `http://localhost:3000/equipamento`;
+
     const { patrimonio } = req.query;
     const response = await fetch(`${url}/${patrimonio}`);
     const data = await response.json();
