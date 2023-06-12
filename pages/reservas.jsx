@@ -7,11 +7,13 @@ import { useEffect, useState } from 'react'
 export default function Reservas() {
     const [reservas, setReservas] = useState([]);
     const [id_sala, setId_sala] = useState('');
+    const [inativa, setInativa] = useState(false); 
     const [agendamento, setAgendamento] = useState(0);
 
     async function salaAtiva(id) {
         const response = await fetch('http://localhost:3001/api/sala?id=' + id);
         const data = await response.json();
+        setInativa(false);
         if (response.status != 200) {
             let form = document.getElementsByTagName('form')[0]
             form.reset();
@@ -19,10 +21,11 @@ export default function Reservas() {
             return false;
         }
         if (data.flaginativo) {
-            let form = document.getElementsByTagName('form')[0]
-            form.reset();
+            //let form = document.getElementsByTagName('form')[0]
+            //form.reset();
+            setInativa(true);
             alert('Sala inativa');
-            return false;
+            //return false;
         }
         setId_sala(data.id_sala);
         return true;
@@ -79,19 +82,27 @@ export default function Reservas() {
         
         const response = await fetch('http://localhost:3001/api/agendamento', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                data: data,
+                reservas: reservas
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
         });
         const result = await response.json();
         if (response.status == 201) {
+            alert(result.message)
             getReservas(null,id_sala)
         }
         else {
             alert(result.message);
         }
     }
+
+    useEffect(() => {
+        console.log(inativa);
+    }, [inativa])
 
     return (
         <div className="main">
@@ -121,7 +132,7 @@ export default function Reservas() {
                                     <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                                 </svg>
                             </Button>
-                            <Button variant="success" title="Salvar" type="submit">
+                            <Button variant="success" title="Salvar" type="submit" disabled={inativa} >
                                 <Image
                                     width={18}
                                     height={18}
@@ -130,7 +141,7 @@ export default function Reservas() {
                                 />
                             </Button>
 
-                            <Button role="button" title="Adicionar" type="submit" >
+                            <Button role="button" title="Adicionar" type="submit" disabled={inativa} >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
                                     <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
                                 </svg></Button>
