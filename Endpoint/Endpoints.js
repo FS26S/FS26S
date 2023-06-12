@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { Sequelize } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -368,6 +368,31 @@ app.get('/agendamento', async (req, res) => {
 app.get('/agendamento/:id', async (req, res) => {
     try {
         const agendamento = await Agendamento.findByPk(req.params.id);
+        if (agendamento) {
+            res.status(200).json(agendamento);
+        } else {
+            res.status(404).json({ message: 'Agendamento não encontrado' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Erro ao buscar agendamento' });
+    }
+});
+
+app.get('/agendamento/sala/:id', async (req, res) => {
+    try {
+        const agendamento = await Agendamento.findAll({
+            where: {
+                id_sala: req.params.id,
+                data_agendamento: {
+                    [Op.gte]: new Date().toISOString().slice(0, 10)
+                }
+            },
+            order: [
+                ['data_agendamento', 'ASC'],
+                ['hora_inicio', 'ASC']
+            ],    
+        });
         if (agendamento) {
             res.status(200).json(agendamento);
         } else {

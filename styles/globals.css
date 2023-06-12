@@ -116,3 +116,22 @@ form label{
   flex-direction: column;
   align-items: center;
 }
+
+.itemReserva{
+  width: 100%;
+  text-align: center;
+  border-radius: 8px;
+  padding: 5px 0;
+}
+
+
+
+.itemReserva:focus{
+  outline: none;
+  background-color: #d9d9d9;
+}
+
+.itemReserva:hover{
+  background-color: #d9d9d9;
+  cursor: pointer;
+}

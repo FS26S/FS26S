@@ -39,7 +39,6 @@ export default function ControleEstoque() {
         e.preventDefault();
         const formData = new FormData(e.target);
         let data = Object.fromEntries(formData);
-        console.log(data)
         switch (data.tipo_movimento) {
             case 'entradas':
                 data.saldo_estoque = parseInt(data.saldo_estoque) + parseInt(data.quantidade);
@@ -54,7 +53,6 @@ export default function ControleEstoque() {
             default:
                 break;
         }
-        console.log(data);
 
         fetch('http://localhost:3001/api/movimentacao', {
             method: 'POST',
@@ -81,7 +79,6 @@ export default function ControleEstoque() {
 
     async function handleAdd(e) {
         e.preventDefault();
-        console.log(e.target)
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         const res = await fetch('http://localhost:3001/api/movimentacao', {
@@ -92,9 +89,6 @@ export default function ControleEstoque() {
             }
         })
         const json = await res.json();
-        console.log(json);
-
-
         //Integrar com a API
     }
 
@@ -114,7 +108,6 @@ export default function ControleEstoque() {
     }
 
     useEffect(() => {
-        console.log(equipamento);
         document.getElementById('id_equipamento').value = equipamento.id_equipamento ?? '';
         document.getElementById('saldo_estoque').value = equipamento.estoque ?? 0;
     }, [equipamento])
