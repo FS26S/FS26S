@@ -12,7 +12,7 @@ export default function LoginPage(){
                 <form className={styles.form}>
                     <Input type="email" placeholder="Seu e-mail"/>
                     <Input type="password" placeholder="Sua senha"/>
-                    <Link href={"/recuperaSenha"} className={styles.recuperarSenha}>Esqueci a Senha</Link>
+                    <Link href={"/redefinirSenha"} className={styles.recuperarSenha}>Esqueci a Senha</Link>
                     <Button>Entrar</Button>
                     <Link href={"/cadastrar"} className={styles.cadastro}>Cadastre-se</Link>
                 </form>
