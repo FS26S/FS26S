@@ -3,6 +3,7 @@ import Image from 'next/image'
 import save from '../public/assets/Save.png'
 import Search from '../src/components/inputPesquisa'
 import { useEffect, useState } from 'react'
+import Head from 'next/head'
 
 export default function Reservas() {
     const [reservas, setReservas] = useState([]);
@@ -21,8 +22,6 @@ export default function Reservas() {
             return false;
         }
         if (data.flaginativo) {
-            //let form = document.getElementsByTagName('form')[0]
-            //form.reset();
             setInativa(true);
             alert('Sala inativa');
             //return false;
@@ -92,7 +91,8 @@ export default function Reservas() {
         });
         const result = await response.json();
         if (response.status == 201) {
-            alert(result.message)
+            console.log(result)
+            alert(`Horário reservado com código ${result.id_agendamento}`)
             getReservas(null,id_sala)
         }
         else {
@@ -106,6 +106,9 @@ export default function Reservas() {
 
     return (
         <div className="main">
+            <Head>
+                <title>Reservas - Controle de Salas UTFPR</title>
+            </Head>
             <Search onClick={getReservas} />
             <div id="reserva">
                 <div className="w-75">

@@ -25,7 +25,8 @@ async function cadastrarSala(req, res) {
         }
     })
     if (response.status === 201){
-        res.status(201).json({message: 'Cadastro realizado com sucesso!'})
+        const data = await response.json()
+        res.status(201).json(data)
     }
     else{
         res.status(500).json(response.message)

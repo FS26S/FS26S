@@ -4,6 +4,7 @@ import Link from "next/link";
 import Search from "../src/components/inputPesquisa";
 import { useState } from "react";
 import { useEffect } from "react";
+import Head from "next/head";
 const save = require('../public/assets/Save.png');
 
 
@@ -114,6 +115,9 @@ export default function ControleEstoque() {
 
     return (
         <main className="main">
+            <Head>
+                <title>Controle de Estoque</title>
+            </Head>
             <Search onClick={getPatrimonio} />
             <Form className="row g-3 mt-5" style={{ width: '100%' }} onSubmit={handleSave}>
                 <div className="d-flex justify-content-between">

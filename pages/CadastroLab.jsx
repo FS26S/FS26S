@@ -2,9 +2,10 @@ import Image from "next/image";
 //import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Search from "../src/components/inputPesquisa";
+import Head from "next/head";
 const save = require('../public/assets/Save.png');
 
-export default function CadastroLab(props) {
+export default function CadastroLab() {
     const api = `http://localhost:3001/api/sala`;
 
     async function getSala(){
@@ -12,6 +13,8 @@ export default function CadastroLab(props) {
         const response = await fetch(`${api}?id=${id}`);
         if (response.status !== 200){
             const data = await response.json();
+            let form = document.getElementById('formCadastroLab');
+            form.reset();
             alert(`Erro ${response.status} - ${data.message}`);
             return false;
         }
@@ -35,8 +38,8 @@ export default function CadastroLab(props) {
             }
         })
         const result = await response.json();
-        alert(result.message);
-        //Integrar com a API
+        if (response.status === 201) alert(`Sala cadastrada com código ${result.id_sala}!`)
+        else alert(result.message);
     }
 
     function handleAdd(e) {
@@ -65,6 +68,9 @@ export default function CadastroLab(props) {
 
     return (
         <div className="main">
+            <Head>
+                <title>Cadastro de Sala e Laboratórios</title>
+            </Head>
             <Search onClick={getSala} />
             <Form className="row g-3 mt-5" style={{ width: '100%' }} id="formCadastroLab" onSubmit={handleSave}>
                 <div className="d-flex justify-content-between">

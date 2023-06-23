@@ -2,6 +2,7 @@ import { Form, Button, Table, Row, Col } from 'react-bootstrap';
 import Search from '../src/components/inputPesquisa';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 const save = require('../public/assets/Save.png');
 
 export default function RelacionamentoSala() {
@@ -77,6 +78,7 @@ export default function RelacionamentoSala() {
         if (check.length > 0) {
             if (window.confirm('Deseja realmente excluir os patrimônios dessa sala?')) {
                 check.forEach((item) => {
+                    console.log(item)
                     fetch(`http://localhost:3001/api/equipamento/relacaosala?id=${item.id}`, {
                         method: 'DELETE'
                     })
@@ -147,6 +149,9 @@ export default function RelacionamentoSala() {
 
     return (
         <div className="main">
+            <Head>
+                <title>Relacionamento Equipamento-Sala</title>
+            </Head>
             <Search onClick={getPatrimonioSala} />
 
             <Form.Group className="mx-auto d-flex justify-content-center align-items-center mb-3 w-50">
@@ -169,7 +174,7 @@ export default function RelacionamentoSala() {
                             patrimonioSala.map((patrimonio) => (
                                 <tr key={patrimonio.id_relacionamento} style={{ borderBottom: '2px solid #ccc' }}>
                                     <th scope="row">
-                                        <Form.Check type="checkbox" id={patrimonio.id_equipamento} />
+                                        <Form.Check type="checkbox" id={patrimonio.id_relacionamento} />
                                     </th>
                                     
                                     <td>Cod:{patrimonio.id_equipamento} - {patrimonio.nome}</td>

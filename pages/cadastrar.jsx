@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { Form } from "react-bootstrap";
 
 function emailUTFPR(email) {
@@ -48,10 +49,8 @@ function Cadastro() {
             body: JSON.stringify(data),
         }
         const response = await fetch(endpoint, options)
-        console.log(response)
         if (response.status === 201) {
             window.location.href = '/login'; //Redireciona para a página de login se tudo ok
-            console.log(response.json())
             return response.json();
         }
         else {
@@ -71,6 +70,9 @@ function Cadastro() {
 
     return (
         <main className="main d-flex align-items-center ">
+            <Head>
+                <title>Cadastro</title>
+            </Head>
             <Form className="form  mx-auto" method="post" onSubmit={handleSubmit} >
                 <p className=''>Cadastro</p>
                 <Input label="Email" name="email" id="email" type="email" />
