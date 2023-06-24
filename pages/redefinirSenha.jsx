@@ -26,7 +26,7 @@ export default function RedefinirSenha() {
             },
             body: JSON.stringify(data),
         };
-        const response = await fetch('http://localhost:3001/api/redefinirSenha', options);
+        const response = await fetch('http://localhost:3000/api/redefinirSenha', options);
         const result = await response.json();
         if (response.status == 200) {
             alert(result.message);

@@ -1,5 +1,5 @@
 async function postPatrimonios(req,res){
-    const url = `http://localhost:3000/equipamento`;
+    const url = `http://localhost:8000/equipamento`;
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -16,7 +16,7 @@ async function postPatrimonios(req,res){
 }
 
 async function getPatrimonios(req,res){
-    const response = await fetch('http://localhost:3000/equipamento');
+    const response = await fetch('http://localhost:8000/equipamento');
     const data = await response.json();
     if (response.status == 200) {
         res.status(200).json(data);

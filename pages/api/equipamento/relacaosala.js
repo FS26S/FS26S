@@ -1,5 +1,5 @@
 async function getRelacaoSala(req, res) {
-    const response = await fetch(`http://localhost:3000/relacionamento/sala/${req.query.id}`, {
+    const response = await fetch(`http://localhost:8000/relacionamento/sala/${req.query.id}`, {
         method: "GET",
     })
     const data = await response.json();
@@ -7,7 +7,7 @@ async function getRelacaoSala(req, res) {
 }
 
 async function deleteRelacaoSala(req, res) {
-    const response = await fetch(`http://localhost:3000/relacionamento/${req.query.id}`, {
+    const response = await fetch(`http://localhost:8000/relacionamento/${req.query.id}`, {
         method: "DELETE",
     })
     const data = await response.json();
@@ -16,7 +16,7 @@ async function deleteRelacaoSala(req, res) {
 
 async function postRelacaoSala(req, res) {
     const body = req.body;
-    const response = await fetch(`http://localhost:3000/relacionamento`, {
+    const response = await fetch(`http://localhost:8000/relacionamento`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

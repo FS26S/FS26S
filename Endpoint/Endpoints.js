@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize('fs26s', 'postgres', /*'1234'*/ '123456', {
+const sequelize = new Sequelize('fs26s', 'postgres', '1234' /*'123456'*/, {
     host: 'localhost',
     dialect: 'postgres',
 });
@@ -139,7 +139,7 @@ const MovimentacaoEstoque = sequelize.define('movimentacao_estoque', {
     timestamps: false
 });
 
-app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+app.listen(8000, () => console.log('Servidor rodando na porta 8000'));
 
 
 module.exports = { app, Sala };

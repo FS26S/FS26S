@@ -14,7 +14,7 @@ export default function ControleEstoque() {
     async function getPatrimonio(e) {
         e.preventDefault();
         const busca = document.getElementById('busca').value;
-        const res = await fetch(`http://localhost:3001/api/equipamento/${busca}`, {
+        const res = await fetch(`http://localhost:3000/api/equipamento/${busca}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export default function ControleEstoque() {
                 break;
         }
 
-        fetch('http://localhost:3001/api/movimentacao', {
+        fetch('http://localhost:3000/api/movimentacao', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -82,7 +82,7 @@ export default function ControleEstoque() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
-        const res = await fetch('http://localhost:3001/api/movimentacao', {
+        const res = await fetch('http://localhost:3000/api/movimentacao', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -97,7 +97,7 @@ export default function ControleEstoque() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
-        const res = await fetch('http://localhost:3001/api/movimentacao', {
+        const res = await fetch('http://localhost:3000/api/movimentacao', {
             method: 'DELETE',
             body: JSON.stringify(data),
             headers: {

@@ -6,7 +6,7 @@ import Head from "next/head";
 const save = require('../public/assets/Save.png');
 
 export default function CadastroLab() {
-    const api = `http://localhost:3001/api/sala`;
+    const api = `http://localhost:3000/api/sala`;
 
     async function getSala(){
         let id = document.getElementById('busca').value;

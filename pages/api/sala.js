@@ -1,5 +1,5 @@
 async function getSala(id, res) {
-    const response = await fetch(`http://localhost:3000/sala/${id}`);
+    const response = await fetch(`http://localhost:8000/sala/${id}`);
     const data = await response.json();
     if (response.status === 200) {
         res.status(200).json(data);
@@ -17,7 +17,7 @@ async function cadastrarSala(req, res) {
         tipo: req.body.tipo, 
         flaginativo: req.body.situacao
     }
-    const response = await fetch(`http://localhost:3000/sala`, {
+    const response = await fetch(`http://localhost:8000/sala`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -34,7 +34,7 @@ async function cadastrarSala(req, res) {
 }
 
 async function deleteSala(id, res) {
-    const response = await fetch(`http://localhost:3000/sala/${id}`, {
+    const response = await fetch(`http://localhost:8000/sala/${id}`, {
         method: "DELETE",
     })
     if (response.status === 200){
