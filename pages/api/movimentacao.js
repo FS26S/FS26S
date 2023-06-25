@@ -1,5 +1,5 @@
 async function getMovimentacao(req, res) {
-    const response = await fetch(`http://localhost:3000/movimentacao`);
+    const response = await fetch(`http://localhost:8000/movimentacao`);
     const data = await response.json();
     if (response.status === 200) {
         res.status(200).json(data);
@@ -10,7 +10,7 @@ async function getMovimentacao(req, res) {
 async function updateMovimentacao(req, res) {}
 async function cadastrarMovimentacao(req, res) {
     const body = req.body
-    const response = await fetch(`http://localhost:3000/movimentacao`, {
+    const response = await fetch(`http://localhost:8000/movimentacao`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -26,7 +26,7 @@ async function cadastrarMovimentacao(req, res) {
 
 }
 async function deleteMovimentacao(req, res) {
-    const response = await fetch(`http://localhost:3000/movimentacao/${req.query.id}`, {
+    const response = await fetch(`http://localhost:8000/movimentacao/${req.query.id}`, {
         method: "DELETE",
     })
     const data = await response.json();

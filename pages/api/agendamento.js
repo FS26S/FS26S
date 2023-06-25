@@ -1,5 +1,5 @@
 async function getReservas(req, res) {
-    const response = await fetch('http://localhost:3000/agendamento/sala/' + req.query.id_sala);
+    const response = await fetch('http://localhost:8000/agendamento/sala/' + req.query.id_sala);
     const data = await response.json();
     if (response.status == 200) {
         res.status(200).json(data);
@@ -10,7 +10,7 @@ async function getReservas(req, res) {
 
 async function postReservas(req, res) {
     const body = req.body.data;
-    const responseReservas = await fetch('http://localhost:3000/agendamento/sala/' + body.id_sala);
+    const responseReservas = await fetch('http://localhost:8000/agendamento/sala/' + body.id_sala);
     const reservas = await responseReservas.json();
     for (let i = 0; i < reservas.length; i++) {
         if (reservas[i].data_agendamento == body.data_agendamento && reservas[i].hora_inicio == body.hora_inicio+':00') {
@@ -20,7 +20,7 @@ async function postReservas(req, res) {
 
     }
 
-    const response = await fetch('http://localhost:3000/agendamento',
+    const response = await fetch('http://localhost:8000/agendamento',
         {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ async function postReservas(req, res) {
 }
 
 async function deleteReservas(req, res) {
-    const response = await fetch('http://localhost:3000/agendamento/' + req.query.id_agendamento,
+    const response = await fetch('http://localhost:8000/agendamento/' + req.query.id_agendamento,
         { method: 'DELETE' });
     const data = await response.json();
     res.status(response.status).json(data.message);

@@ -12,7 +12,7 @@ export default function Reservas() {
     const [agendamento, setAgendamento] = useState(0);
 
     async function salaAtiva(id) {
-        const response = await fetch('http://localhost:3001/api/sala?id=' + id);
+        const response = await fetch('http://localhost:3000/api/sala?id=' + id);
         const data = await response.json();
         setInativa(false);
         if (response.status != 200) {
@@ -42,7 +42,7 @@ export default function Reservas() {
             return false;
         }
 
-        const response = await fetch('http://localhost:3001/api/agendamento?id_sala=' + id_sala);
+        const response = await fetch('http://localhost:3000/api/agendamento?id_sala=' + id_sala);
         const data = await response.json();
         setReservas(data);
     }
@@ -51,7 +51,7 @@ export default function Reservas() {
     }
 
     async function handleDelete() {
-        const response = await fetch('http://localhost:3001/api/agendamento?id_agendamento=' + agendamento, {
+        const response = await fetch('http://localhost:3000/api/agendamento?id_agendamento=' + agendamento, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ export default function Reservas() {
         }
         data = {...data, id_pessoa: 1} //Utilizar o id da pessoa logada
         
-        const response = await fetch('http://localhost:3001/api/agendamento', {
+        const response = await fetch('http://localhost:3000/api/agendamento', {
             method: 'POST',
             body: JSON.stringify({
                 data: data,

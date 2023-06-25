@@ -12,7 +12,7 @@ export default function RelacionamentoSala() {
 
     async function getPatrimonioSala() {
         let codSala = document.getElementById('busca').value;
-        const res = await fetch(`http://localhost:3001/api/equipamento/relacaosala?id=${codSala}`)
+        const res = await fetch(`http://localhost:3000/api/equipamento/relacaosala?id=${codSala}`)
         try {
             const json = await res.json();
             console.log(json)
@@ -29,7 +29,7 @@ export default function RelacionamentoSala() {
     }
 
     async function getPatrimonios() {
-        const response = await fetch(`http://localhost:3001/api/patrimonios`)
+        const response = await fetch(`http://localhost:3000/api/patrimonios`)
         try {
             const json = await response.json();
             console.log(json)
@@ -50,7 +50,7 @@ export default function RelacionamentoSala() {
         if (codSala !== '' && idPatrimonio !== '') {
             document.getElementById('codSala').classList.remove('is-invalid');
             document.getElementById('patrimonio').classList.remove('is-invalid');
-            const response = await fetch(`http://localhost:3001/api/equipamento/relacaosala`, {
+            const response = await fetch(`http://localhost:3000/api/equipamento/relacaosala`, {
                 method: 'POST',
                 body: JSON.stringify({
                     id_equipamento: idPatrimonio,
@@ -79,7 +79,7 @@ export default function RelacionamentoSala() {
             if (window.confirm('Deseja realmente excluir os patrimônios dessa sala?')) {
                 check.forEach((item) => {
                     console.log(item)
-                    fetch(`http://localhost:3001/api/equipamento/relacaosala?id=${item.id}`, {
+                    fetch(`http://localhost:3000/api/equipamento/relacaosala?id=${item.id}`, {
                         method: 'DELETE'
                     })
 
