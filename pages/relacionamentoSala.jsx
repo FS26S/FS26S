@@ -69,11 +69,9 @@ export default function RelacionamentoSala() {
             document.getElementById('codSala').classList.add('is-invalid');
             document.getElementById('patrimonio').classList.add('is-invalid');
             alert('Selecione um patrimônio e informe o código da sala');
-
         }
     }
     async function handleDelete() {
-
         let check = document.querySelectorAll('input[type="checkbox"]:checked');
         if (check.length > 0) {
             if (window.confirm('Deseja realmente excluir os patrimônios dessa sala?')) {
@@ -88,64 +86,6 @@ export default function RelacionamentoSala() {
         }
         getPatrimonioSala();
     }
-
-    useEffect(() => {
-        getPatrimonios();
-        
-        //getPatrimonioSala();
-        //setando os patrimonios para teste 
-        /*setPatrimonioSala([
-            {
-                id_equipamento: 1,
-                nome: 'Patrimônio 1',
-                qtdAtivos: 1,
-                qtdConserto: 0
-            },
-            {
-                id_equipamento: 2,
-                nome: 'Patrimônio 2',
-                qtdAtivos: 1,
-                qtdConserto: 0
-            },
-            {
-                id_equipamento: 3,
-                nome: 'Patrimônio 3',
-                qtdAtivos: 0,
-                qtdConserto: 1
-            },
-            {
-                id_equipamento: 4,
-                nome: 'Patrimônio 4',
-                qtdAtivos: 2,
-                qtdConserto: 1,
-            },
-            {
-                id_equipamento: 5,
-                nome: 'Patrimônio 5',
-                qtdAtivos: 1,
-                qtdConserto: 0
-            },
-            {
-                id_equipamento: 6,
-                nome: 'Patrimônio 6',
-                qtdAtivos: 1,
-                qtdConserto: 0
-            },
-            {
-                id_equipamento: 7,
-                nome: 'Patrimônio 7',
-                qtdAtivos: 0,
-                qtdConserto: 1
-            },
-            {
-                id_equipamento: 8,
-                nome: 'Patrimônio 8',
-                qtdAtivos: 2,
-                qtdConserto: 1,
-            },
-        ]);*/
-    }, []);
-
 
     return (
         <div className="main">

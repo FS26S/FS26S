@@ -6,7 +6,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize('fs26s', 'postgres', /*'1234'*/ '123456', {
+const senhaPostgres = '123456'; //Atualizar senha do postgres, conforme a senha do seu banco de dados
+
+const sequelize = new Sequelize('fs26s', 'postgres', senhaPostgres,{
     host: 'localhost',
     dialect: 'postgres',
 });

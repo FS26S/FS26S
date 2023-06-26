@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
  
-function Route({ children, href, style }) {
+function Route({ children,className, href, style }) {
   const router = useRouter()
  
   const handleClick = (e) => {
@@ -10,7 +10,7 @@ function Route({ children, href, style }) {
   }
  
   return (
-    <Link href={href} onClick={handleClick} style={style} >
+    <Link href={href} onClick={handleClick} className={className} style={style} >
         {children}
     </Link>
     )
