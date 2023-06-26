@@ -1,9 +1,5 @@
 import Head from 'next/head'
 import Login from './login'
-/*import CadastroLab from './cadastroLab'
-import Cadastro from './cadastrar'
-import ControleEstoque from './controleEstoque'*/
-
 
 export default function Home() {
   return (

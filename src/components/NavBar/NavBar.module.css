@@ -1,0 +1,17 @@
+.nav_dropdown:hover{
+  font-weight: bold;
+}
+
+.nav_dropdown .dropdown-menu{
+  background-color: #EAE8E8;
+  border: none;
+}
+
+.navbar-nav,
+.mr-auto {
+flex: 1;
+margin: auto !important;
+display: flex;
+justify-content: space-between;
+}
+

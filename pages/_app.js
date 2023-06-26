@@ -1,13 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css'
-import NavBar from './NavBar/NavBar';
+import NavBar from '../src/components/NavBar/NavBar';
 
 function MyApp({ Component, pageProps, router }) {
 
   const { pathname } = router;
-
     const excludedPaths = ['/', '/cadastrar', '/redefinirSenha'];
-
     // Verifica se o pathname está na lista de páginas a serem excluídas
     const shouldRenderNavBar = !excludedPaths.includes(pathname);
 

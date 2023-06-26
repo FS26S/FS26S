@@ -4,6 +4,7 @@ import styles from '../styles/login.module.css'
 import Input from "../src/components/input/input";
 import Button from "../src/components/button/button";
 export default function LoginPage(){
+    
     return (
         <div className={styles.background}>
             <LoginCard title="Controle de Patrimonio Reserva de Salas">
@@ -13,7 +14,7 @@ export default function LoginPage(){
                     <Input type="email" placeholder="Seu e-mail"/>
                     <Input type="password" placeholder="Sua senha"/>
                     <Link href={"/redefinirSenha"} className={styles.recuperarSenha}>Esqueci a Senha</Link>
-                    <Button>Entrar</Button>
+                    <Button ><Link style={{textDecoration:'none'}} href="/CadastroLab">Entrar</Link></Button>
                     <Link href={"/cadastrar"} className={styles.cadastro}>Cadastre-se</Link>
                 </form>
             </LoginCard>
